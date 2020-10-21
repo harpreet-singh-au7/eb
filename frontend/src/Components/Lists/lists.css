@@ -6,13 +6,3 @@
   margin: 6px !important;
   background-color: lightgray !important;
 }
-.list_background {
-  background-color: lightgray !important;
-  display: block;
-  float: right;
-  margin: 50px;
-  padding: 10px;
-  position: relative;
-  left: -15vw;
-  top: 15vh;
-}

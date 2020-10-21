@@ -13,11 +13,11 @@ function Lists({list}) {
         <div >
             <CustomPaper className="list_background">
                 <CssBaseline />
-                <Title  title={list.title}/>
+                <Title  title={list.title} listId={list.id}/>
                {list.cards.map((card)=>(
                    <Card key={card.id} card={card} />
                ))}
-                <AddInput listId={list.id} />
+                <AddInput listId={list.id} type="todo"/>
                 <div className="card_blank"></div>
             </CustomPaper>
             
