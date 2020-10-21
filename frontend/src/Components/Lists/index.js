@@ -8,18 +8,16 @@ import AddInput from '../addInput'
 
 
 
-function Lists() {
+function Lists({list}) {
     return (
         <div >
             <CustomPaper className="list_background">
                 <CssBaseline />
-                <Title  />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <AddInput />
+                <Title  title={list.title}/>
+               {list.cards.map((card)=>(
+                   <Card key={card.id} card={card} />
+               ))}
+                <AddInput listId={list.id} />
                 <div className="card_blank"></div>
             </CustomPaper>
             

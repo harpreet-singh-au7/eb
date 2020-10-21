@@ -1,9 +1,24 @@
 import { InputBase, Button, IconButton, Paper} from '@material-ui/core'
-import React from 'react'
+import React,{useState,useContext} from 'react'
 import "./inputTodo.css"
 import ClearIcon from '@material-ui/icons/Clear';
+import storeAPI from '../../Store/storeAPI';
 
-function InputTodo({setOpen}) {
+function InputTodo({setOpen,listId}) {
+    const [ctitle, setCtitle] = useState('')
+    const {addTodo} = useContext(storeAPI)
+    const changeHandeler =(e) =>{
+     setCtitle(e.target.value)
+    }
+    const submitHandeler=()=>{
+     addTodo(ctitle,listId)
+     setOpen(false)
+     setCtitle('')
+    }
+
+    const handleDone =() =>{
+        setOpen(false)
+    }
     return (
         <div className="inputtodo">
             <div  >
@@ -11,7 +26,9 @@ function InputTodo({setOpen}) {
              <InputBase
                 multiline 
                 fullWidth
-                onBlur={()=>setOpen(false)}
+                value={ctitle}
+                onBlur={handleDone}
+                onChange={changeHandeler}
                 inputProps={{
                     className:"inputp"
                         }}
@@ -21,7 +38,7 @@ function InputTodo({setOpen}) {
                 </Paper>
             </div>
             <div className="addButton_div">
-                <Button className="addButton" onClick={()=>setOpen(false)}> + ADD</Button>
+                <Button className="addButton" onClick={submitHandeler}> + ADD</Button>
                 <IconButton onClick={()=>setOpen(false)}><ClearIcon /></IconButton>
             </div>
             

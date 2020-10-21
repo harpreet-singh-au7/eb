@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import "./input.css"
 import InputTodo from './inputTodo'
 
-function AddInput() {
+function AddInput({listId}) {
     const [open, setOpen] = useState(false)
     return (
         <div className="addInput">
             <Collapse in={open} >
-                <InputTodo setOpen={setOpen}/>
+                <InputTodo setOpen={setOpen} listId={listId}/>
             </Collapse>
             <Collapse in={!open}>
             <Paper className="addInput_button" onClick={()=>setOpen(!open)} elevation={0}>

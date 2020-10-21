@@ -3,10 +3,10 @@ import React from 'react'
 
 import "./card.css"
 
-function Card() {
+function Card({card}) {
     return (
         <div className="Card">
-            <Paper className="card_container">Adding card Func</Paper>
+            <Paper className="card_container">{card.title}</Paper>
             
         </div>
     )
