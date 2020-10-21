@@ -8,7 +8,10 @@ function Title() {
     const [open, setOpen] = useState(false)
     return (
         <div>
-            {open ? <div><InputBase value="Todo" inputProps={{
+            {open ? <div><InputBase
+                value="Todo"
+                autoFocus
+                inputProps={{
                 className: "input"
             }}
                 fullWidth

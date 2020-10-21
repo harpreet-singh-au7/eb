@@ -1,0 +1,6 @@
+.card_container {
+  padding: 7px !important;
+  margin: 6px !important;
+  background-color: darkcyan !important;
+  border: 1px groove blue;
+}

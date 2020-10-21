@@ -3,8 +3,8 @@ import {CssBaseline, Paper,Typography} from "@material-ui/core"
 
 export const CustomPaper = styled(Paper)`
   width:300px;
+  margin-left:2vw;
   
-  margin-left:2vw
 `;
 
 export const TodoEdit =  styled.div.attrs((props) => ({ tabIndex: 0 }))`
