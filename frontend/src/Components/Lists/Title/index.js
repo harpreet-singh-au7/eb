@@ -12,9 +12,9 @@ function Title() {
                 className: "input"
             }}
                 fullWidth
-                onBlur={()=> setOpen(!open)}/></div> :
-            <div className="Container"> <TodoEdit  className="Container-box" onClick={()=> setOpen(!open)}>Todo</TodoEdit><MoreHorizIcon /></div>
-    }
+                onBlur={() => setOpen(!open)} /></div> :
+                <div className="Container"> <TodoEdit className="Container-box" onClick={() => setOpen(!open)}>Todo</TodoEdit><MoreHorizIcon /></div>
+            }
     
             
 
