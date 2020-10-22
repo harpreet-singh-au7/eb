@@ -1,27 +1,41 @@
 import React from 'react'
-import {CssBaseline, Typography} from "@material-ui/core"
-import {CustomPaper} from "../../StyledComponents/index"
+import {CssBaseline,  Paper,  Typography} from "@material-ui/core"
+
 import Title from './Title'
 import "./lists.css"
 import Card from "../Card"
 import AddInput from '../addInput'
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 
-function Lists({list}) {
+
+function Lists({list , index}) {
     return (
-        <div >
-            <CustomPaper className="list_background">
+        <Draggable draggableId={list.id} index={index}>
+       {(provided)=>(
+            <div  {...provided.draggableProps} ref={provided.innerRef}>
+            <Paper className="list_background" {...provided.dragHandleProps}>
                 <CssBaseline />
                 <Title  title={list.title} listId={list.id}/>
-               {list.cards.map((card)=>(
-                   <Card key={card.id} card={card} />
+                <Droppable droppableId={list.id}>
+                    {(provided)=>(
+                    <div ref={provided.innerRef}{...provided.droppableProps} >
+                        {list.cards.map((card,index)=>(
+                   <Card key={card.id} card={card} index={index} className="drop_card"/>
                ))}
+               {provided.placeholder}
+               </div>
+               )}
+               
+               </Droppable>
                 <AddInput listId={list.id} type="todo"/>
                 <div className="card_blank"></div>
-            </CustomPaper>
+            </Paper>
             
         </div>
+       )}
+        </Draggable>
     )
 }
 
