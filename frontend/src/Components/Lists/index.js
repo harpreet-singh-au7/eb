@@ -29,7 +29,8 @@ function Lists({list , index}) {
                )}
                
                </Droppable>
-                <AddInput listId={list.id} type="todo"/>
+               {list.title=="Todo" ?<>
+                <AddInput listId={list.id} type="todo"/></>:""}
                 <div className="card_blank"></div>
             </Paper>
             

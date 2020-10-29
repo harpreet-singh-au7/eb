@@ -40,10 +40,8 @@ function InputTodo({ setOpen=()=>false, listId, type}) {
                 value={ctitle}
                 onBlur={async()=>await setOpen(false)}
                 onChange={changeHandeler}
-                inputProps={{
-                    className:"inputp"
-                        }}
-                        autoFocus
+             
+                        
                  placeholder={type== 'todo'?"Enter your text here":"Enter list title here"}
             />
                 </Paper>

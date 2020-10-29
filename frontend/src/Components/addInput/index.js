@@ -11,7 +11,7 @@ function AddInput({listId , type}) {
                 <InputTodo setOpen={setOpen} listId={listId} type={type}/>
             </Collapse>
             <Collapse in={!open}>
-            <Paper className="addInput_button" onClick={()=>setOpen(!open)} elevation={0}>
+            <Paper className="addInput_button" elevation={0} onClick={()=>setOpen(!open)} >
                 <Typography className="addInput_text">
                    {type === "todo"? "Add Todo" :"Add another list"}
                 </Typography>
