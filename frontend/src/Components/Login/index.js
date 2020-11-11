@@ -5,21 +5,22 @@ import { useForm } from "react-hook-form";
 import axios from "../../axios";
 import isEmail from "validator/lib/isEmail";
 import { useStateValue } from "../../Redux/StateProvider";
+import { connect, useSelector } from "react-redux";
 
 const styles = {
   container: {
     width: "80%",
     margin: "0 auto",
-  }, 
+  },
   input: {
     width: "100%",
-  }
-  
+  },
 };
 
-function Login() {
+function Login({ usersa }) {
+  const users = useSelector((state) => state.auth.user);
   const history = useHistory();
-  const[{user},dispatch] = useStateValue()
+  const [{ user }, dispatch] = useStateValue();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
@@ -27,46 +28,47 @@ function Login() {
     mode: "onBlur",
   });
 
-
-
-  let databody={
-      email,
-      password
-  }
+  let databody = {
+    email,
+    password,
+  };
   const login = (event) => {
     event.preventDefault();
     //login logic
     async function fetchUserData() {
-        const res = await axios.post("/user/login",databody)
-          .then((res) => {
-            let data = {
-              email,
-            }
-                if(res){
-                  axios.post("/user/me",data).then((r) => {dispatch({
-                    type: "SET_USER",
-                    user: r.data,
-                  });})
-                    dispatch({
-                        type: "SET_TOKEN",
-                        item: res.data,
-                      });
-                }
-                setTimeout(() => {
-                  history.replace("/");
-                }, 1500);
-              // console.log(res.data)
-            setLoading(true)
-            // console.log("Logged in")
-          })
-          .catch((error) => {
-            alert(error.message);
-          });
-          
-      }
-      fetchUserData();
+      const res = await axios
+        .post("/user/login", databody)
+        .then((res) => {
+          let data = {
+            email,
+          };
+          if (res) {
+            axios.post("/user/me", data).then((r) => {
+              dispatch({
+                type: "SET_USER",
+                user: r.data,
+              });
+            });
+            dispatch({
+              type: "SET_TOKEN",
+              item: res.data,
+            });
+          }
+          setTimeout(() => {
+            history.replace("/");
+          }, 1500);
+          // console.log(res.data)
+          setLoading(true);
+          // console.log("Logged in")
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     }
+    fetchUserData();
+  };
 
+  console.log(users);
   // const Register = (event) => {
   //   event.preventDefault();
   //   auth
@@ -91,7 +93,7 @@ function Login() {
       <div className="login_container">
         <h1>Login</h1>
         <form>
-          <label for="email">
+          <label htmlFor="email">
             <h5>E-mail</h5>
           </label>
           <br />
@@ -112,7 +114,7 @@ function Login() {
           )}
 
           <br />
-          <label for="password">
+          <label htmlFor="password">
             <h5>Password</h5>
           </label>
           <br />
@@ -136,7 +138,7 @@ function Login() {
             </p>
           )}
           <button onClick={login} type="submit" className="login_SigninButton">
-          {loading ? <p>Loading ... </p> : "SignIn"}
+            {loading ? <p>Loading ... </p> : "SignIn"}
           </button>
         </form>
         <p>
@@ -146,9 +148,9 @@ function Login() {
       </div>
       <br />
       <div className="login_divider">
-        <div class="inside">
+        <div className="inside">
           <span>
-            <h5>New to Hub  ?</h5>
+            <h5>New to Hub ?</h5>
           </span>
         </div>
 
@@ -163,4 +165,10 @@ function Login() {
   );
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    usersa: state.auth.user,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

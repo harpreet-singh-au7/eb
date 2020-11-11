@@ -5,6 +5,7 @@ import axios from "../../axios";
 import { useForm } from "react-hook-form";
 import isEmail from "validator/lib/isEmail";
 import { useStateValue } from "../../Redux/StateProvider";
+import { useDispatch } from "react-redux";
 
 const styles = {
   container: {
@@ -18,7 +19,8 @@ const styles = {
 
 function Createuser() {
   // const [{ user }] = useStateValue();s
-  const [{token},dispatch] = useStateValue();
+  const dispatcher = useDispatch();
+  const [{ token }, dispatch] = useStateValue();
   const [name, setName] = useState("");
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -31,39 +33,45 @@ function Createuser() {
   let databody = {
     username: user.name,
     email: user.email,
-    password:user.password
-
+    password: user.password,
   };
 
   useEffect(() => {
     setName(name);
   }, [user]);
 
+  const Adduser = () => {
+    dispatcher({
+      type: "CREATE_USER",
+      payload: {
+        name: user.name,
+      },
+    });
+  };
+
   const signup = (event) => {
     event.preventDefault();
 
     async function fetchUserData() {
-        const res = await axios
-          .post("/user/signup", databody)
-          .then((res) => {
-            if(res){
-                dispatch({
-                    type: "SET_USER",
-                    user: databody,
-                  });
-            }
-            setLoading(true)
-            setTimeout(() => {
-                history.replace("/");
-              }, 1500);
-          })
-          .catch((error) => {
-            alert(error.message);
-          });
-          
-      }
-      fetchUserData();
-        
+      const res = await axios
+        .post("/user/signup", databody)
+        .then((res) => {
+          if (res) {
+            dispatch({
+              type: "SET_USER",
+              user: databody,
+            });
+          }
+          setLoading(true);
+          setTimeout(() => {
+            history.replace("/");
+          }, 1500);
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    }
+    fetchUserData();
   };
 
   const handleOnChange = (e) => {
@@ -168,7 +176,6 @@ function Createuser() {
 
           <p>
             By creating an account, you agree to the Terms of Use and Privacy
-          
           </p>
 
           <div className="register__alreadyAccount">
