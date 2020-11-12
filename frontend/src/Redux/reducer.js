@@ -1,9 +1,8 @@
 export const initialState = {
-  card:[],
-  user:null,
-  token:[]
+  card: [],
+  user: null,
+  token: [],
 };
-
 
 const reducer = (state, action) => {
   console.log(action);
@@ -19,7 +18,7 @@ const reducer = (state, action) => {
         ...state,
         item: action.item,
       };
-      case "SET_TOKEN":
+    case "SET_TOKEN":
       return {
         ...state,
         item: action.item,
