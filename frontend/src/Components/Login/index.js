@@ -165,10 +165,4 @@ function Login({ usersa }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    usersa: state.auth.user,
-  };
-};
-
 export default connect(mapStateToProps)(Login);

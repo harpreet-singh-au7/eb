@@ -141,6 +141,7 @@ function Createuser() {
             <input
               value={user.password}
               onChange={handleOnChange}
+              profi="profi"
               name="password"
               placeholder="Enter your password here"
               type="password"
