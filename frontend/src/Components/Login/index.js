@@ -154,15 +154,10 @@ function Login({ usersa }) {
           </span>
         </div>
 
-        <button
-          onClick={(e) => history.push("/createuser")}
-          className="login_RegisterButton"
-        >
-          Create your Account
-        </button>
+        <button></button>
       </div>
     </div>
   );
 }
 
-export default connect(mapStateToProps)(Login);
+export default Login;
